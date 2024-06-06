@@ -1,5 +1,3 @@
-// import tiny from 'tiny-json-http';
-
 export type DatocmsRequest = {
   query: string;
   variables?: {
@@ -18,7 +16,6 @@ export type ResponseBodyQueryType = {
 export const performRequest = async (props: DatocmsRequest): Promise<ResponseBodyQueryType> => {
 
   const { query, variables = {}, includeDrafts = false } = props;
-  console.log('==> query', query);
 
   const response = await fetch("https://graphql.datocms.com/", {
     headers: {
@@ -29,15 +26,12 @@ export const performRequest = async (props: DatocmsRequest): Promise<ResponseBod
     body: JSON.stringify({ query, variables }),
   });
 
-  console.log('response', response);
-  
   const responseBody: ResponseBodyQueryType = await response.json();
-  console.log('responseBody', responseBody);
-  
+
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}: ${JSON.stringify(responseBody)}`);
   }
-  
+
   return responseBody;
 }
 

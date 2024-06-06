@@ -17,9 +17,14 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"],
       "~/lib/*": ["/lib/*"],
+      "~/components/*": ["/src/components/*"],
+      "~/atoms/*": ["/src/components/atoms/*"],
+      "~/molecules/*": ["/src/components/molecules/*"],
+      "~/organisms/*": ["/src/components/organisms/*"],
+      "~/template/*": ["/src/components/template/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

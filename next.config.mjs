@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import createNextIntlPlugin from 'next-intl/plugin';
 import { config } from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -11,8 +12,8 @@ config({
 });
 config({ path: '.env.dev', override: true });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
   skipTrailingSlashRedirect: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
@@ -27,4 +28,5 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);
