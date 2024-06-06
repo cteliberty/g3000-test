@@ -14,7 +14,7 @@ const Layout : FC<LayoutProps> = (props) => {
     <>
       <Header translateRout={translateRout} />
       {children}
-  </>
+    </>
   )
 }
 

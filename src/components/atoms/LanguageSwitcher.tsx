@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { locales } from 'src/i18n';
 import LinkLocale from './LinkLocale';
+import { locales } from 'src/navigation';
 
 export type TranslateRouteType = {
   locale: string;
@@ -18,7 +18,7 @@ const LanguageSwitcher: FC<LanguageSwitcher> = (props) => {
   const {translateRout} = props
 
   return (
-    <ul style={{listStyle: 'none', display: 'flex', margin: 0}}>
+    <ul style={{listStyle: 'none', display: 'flex', margin: 0, gap: 8}}>
       {locales.map((locale) => (
         <li key={locale}>
           <LinkLocale translateRout={translateRout?.find((element) => element.locale === locale)} locale={locale}/>

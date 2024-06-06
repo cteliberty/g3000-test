@@ -7,22 +7,22 @@ import { TranslateSlugType } from 'src/type/translateSlug';
 import { TranslateRouteType } from '../atoms/LanguageSwitcher';
 import convertSlugToRoute from 'src/lib/convertSlugToRoute';
 
-export const ticketListSlug: TranslateSlugType[] = [
+export const nightSlug: TranslateSlugType[] = [
   {
     locale: 'en',
-    slug: 'tickets'
+    slug: 'night-at-the-top'
   },
   {
     locale: 'fr',
-    slug: 'billetterie'
+    slug: 'nuit-au-sommet'
   },
   {
-    locale: 'fr',
-    slug: 'entradas'
+    locale: 'es',
+    slug: 'noche-en-la-cima'
   }
 ];
 
-export const ticketListRoute: TranslateRouteType[] = convertSlugToRoute(ticketListSlug);
+export const nightRoute: TranslateRouteType[] = convertSlugToRoute(nightSlug);
 
 export type PageSlugProps = {
   title?: string;
@@ -33,7 +33,7 @@ export type PageSlugProps = {
 
 type TicketListQueryProps = {
   data: {
-    ticketList: PageSlugProps;
+    night: PageSlugProps;
   };
 }
 
@@ -43,8 +43,8 @@ type queryType = {
 
 const queryData = async (props:queryType) : Promise<PageSlugProps> => {
   const {locale} = props;
-  const PAGE_CONTENT_QUERY = `query TicketListQuery($locale: SiteLocale) {
-    ticketList(locale: $locale) {
+  const PAGE_CONTENT_QUERY = `query NightQuery($locale: SiteLocale) {
+    night(locale: $locale) {
       title
       header {
         description
@@ -52,16 +52,16 @@ const queryData = async (props:queryType) : Promise<PageSlugProps> => {
     }
   }`;
 
-  const {data:{ ticketList }}: TicketListQueryProps = await performRequest({
+  const {data:{ night }}: TicketListQueryProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
       locale: locale
     }
   });
-  return ticketList;
+  return night;
 }
 
-const TicketList: FC<PageContextType> = async (props) => {
+const Night: FC<PageContextType> = async (props) => {
   const params = {
     locale: props.params.locale,
   }
@@ -70,7 +70,7 @@ const TicketList: FC<PageContextType> = async (props) => {
 
   const t = await getTranslations('Index');
   return (
-    <Layout translateRout={ticketListRoute}>
+    <Layout translateRout={nightRoute}>
       <h1>{t('title')}</h1>
       <h2>{pageSlug.title}</h2>
       {/* <h3>{pageSlug.hero[0].subtitle}</h3>
@@ -79,4 +79,4 @@ const TicketList: FC<PageContextType> = async (props) => {
   );
 }
 
-export default TicketList;
+export default Night;

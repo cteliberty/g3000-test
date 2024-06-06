@@ -7,22 +7,22 @@ import { TranslateSlugType } from 'src/type/translateSlug';
 import { TranslateRouteType } from '../atoms/LanguageSwitcher';
 import convertSlugToRoute from 'src/lib/convertSlugToRoute';
 
-export const ticketListSlug: TranslateSlugType[] = [
+export const daySlug: TranslateSlugType[] = [
   {
     locale: 'en',
-    slug: 'tickets'
+    slug: 'your-day'
   },
   {
     locale: 'fr',
-    slug: 'billetterie'
+    slug: 'votre-journee'
   },
   {
-    locale: 'fr',
-    slug: 'entradas'
+    locale: 'es',
+    slug: 'su-día'
   }
 ];
 
-export const ticketListRoute: TranslateRouteType[] = convertSlugToRoute(ticketListSlug);
+export const dayRoute: TranslateRouteType[] = convertSlugToRoute(daySlug);
 
 export type PageSlugProps = {
   title?: string;
@@ -33,7 +33,7 @@ export type PageSlugProps = {
 
 type TicketListQueryProps = {
   data: {
-    ticketList: PageSlugProps;
+    day: PageSlugProps;
   };
 }
 
@@ -43,8 +43,8 @@ type queryType = {
 
 const queryData = async (props:queryType) : Promise<PageSlugProps> => {
   const {locale} = props;
-  const PAGE_CONTENT_QUERY = `query TicketListQuery($locale: SiteLocale) {
-    ticketList(locale: $locale) {
+  const PAGE_CONTENT_QUERY = `query DayQuery($locale: SiteLocale) {
+    day(locale: $locale) {
       title
       header {
         description
@@ -52,16 +52,16 @@ const queryData = async (props:queryType) : Promise<PageSlugProps> => {
     }
   }`;
 
-  const {data:{ ticketList }}: TicketListQueryProps = await performRequest({
+  const {data:{ day }}: TicketListQueryProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
       locale: locale
     }
   });
-  return ticketList;
+  return day;
 }
 
-const TicketList: FC<PageContextType> = async (props) => {
+const Day: FC<PageContextType> = async (props) => {
   const params = {
     locale: props.params.locale,
   }
@@ -70,7 +70,7 @@ const TicketList: FC<PageContextType> = async (props) => {
 
   const t = await getTranslations('Index');
   return (
-    <Layout translateRout={ticketListRoute}>
+    <Layout translateRout={dayRoute}>
       <h1>{t('title')}</h1>
       <h2>{pageSlug.title}</h2>
       {/* <h3>{pageSlug.hero[0].subtitle}</h3>
@@ -79,4 +79,4 @@ const TicketList: FC<PageContextType> = async (props) => {
   );
 }
 
-export default TicketList;
+export default Day;
