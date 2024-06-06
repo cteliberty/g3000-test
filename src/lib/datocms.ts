@@ -1,3 +1,10 @@
+const { config } = require('dotenv');
+
+config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+config({ path: '.env.dev', override: true });
+
 export type DatocmsRequest = {
   query: string;
   variables?: {
@@ -17,7 +24,18 @@ export const performRequest = async (props: DatocmsRequest): Promise<ResponseBod
 
   const { query, variables = {}, includeDrafts = false } = props;
 
-  const response = await fetch("https://graphql.datocms.com/", {
+
+  let endpoint = 'https://graphql.datocms.com';
+
+  if (process.env.NEXT_DATOCMS_ENVIRONMENT) {
+    endpoint += `/environments/${process.env.NEXT_DATOCMS_ENVIRONMENT}`;
+  }
+
+  // if (preview) {
+  //   endpoint += `/preview`;
+  // }
+
+  const response = await fetch(endpoint, {
     headers: {
       Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
       ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
