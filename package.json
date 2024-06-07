@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@datocms/cma-client": "^3.3.2",
+    "@datocms/cma-client-node": "^3.3.2",
+    "axios": "^1.7.2",
     "next": "14.2.3",
     "next-intl": "^3.14.1",
     "react": "^18",

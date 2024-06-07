@@ -1,3 +1,5 @@
+import { draftMode } from "next/headers";
+
 const { config } = require('dotenv');
 
 config({
@@ -21,9 +23,8 @@ export type ResponseBodyQueryType = {
 }
 
 export const performRequest = async (props: DatocmsRequest): Promise<ResponseBodyQueryType> => {
-
-  const { query, variables = {}, includeDrafts = false } = props;
-
+  const { query, variables = {}} = props;
+  const { isEnabled } = draftMode();
 
   let endpoint = 'https://graphql.datocms.com';
 
@@ -31,14 +32,14 @@ export const performRequest = async (props: DatocmsRequest): Promise<ResponseBod
     endpoint += `/environments/${process.env.NEXT_DATOCMS_ENVIRONMENT}`;
   }
 
-  // if (preview) {
-  //   endpoint += `/preview`;
-  // }
+  if (isEnabled) {
+    endpoint += `/preview`;
+  }
 
   const response = await fetch(endpoint, {
     headers: {
       Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
-      ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
+      // ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
     },
     method: "POST",
     body: JSON.stringify({ query, variables }),

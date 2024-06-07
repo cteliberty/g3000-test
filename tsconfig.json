@@ -27,6 +27,6 @@
       "~/template/*": ["/src/components/template/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/.not-found.tsx", "src/app/.layout.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/.not-found.tsx", "src/app/.layout.tsx", "src/app/api/preview/route.js", "src/app/api/post-install.js", "src/app/api/exit-preview.js"],
   "exclude": ["node_modules"]
 }

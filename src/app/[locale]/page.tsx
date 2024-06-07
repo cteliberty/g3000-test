@@ -1,6 +1,6 @@
-import { getTranslations } from 'next-intl/server';
 import { FC } from 'react';
-import Layout from 'src/components/template/layout';
+import { getTranslations } from 'next-intl/server';
+import Layout from 'src/components/template/layout'
 import { performRequest } from 'src/lib/datocms';
 import { PageContextType } from 'src/type/page';
 
@@ -24,6 +24,7 @@ type queryType = {
 
 const query = async (props:queryType) : Promise<HomeProps> => {
   const {locale} = props;
+
   const PAGE_CONTENT_QUERY = `query HomeQuery($locale: SiteLocale) {
     home(locale: $locale) {
       hero {
@@ -40,7 +41,7 @@ const query = async (props:queryType) : Promise<HomeProps> => {
     query: PAGE_CONTENT_QUERY,
     variables: {
       locale: locale
-    }
+    },
   });
   return home;
 }
