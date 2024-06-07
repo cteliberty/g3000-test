@@ -32,8 +32,8 @@ const useGetLink = async (page: PageLink | undefined): Promise<string> => {
       case 'ticket_list':
         return `/${getSlugPage(ticketListSlug, locale)}/`;
 
-      // case 'product':
-      //   return `/${getSlugPage(ticketListSlugLocale.slugLocales, locale)}/${page.slug}`;
+      case 'product':
+        return `/${getSlugPage(ticketListSlug, locale)}/${page.slug}`;
 
       case 'live':
         return `/${getSlugPage(liveSlug, locale)}/`;

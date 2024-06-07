@@ -34,11 +34,19 @@ const query = async (props:queryType) : Promise<HomeProps> => {
     }
   }`;
 
-  const {data:{ home }}: HomeQueryProps = await performRequest({ query: PAGE_CONTENT_QUERY, variables: {locale: locale} });
+  console.log('==> home', await performRequest({ query: PAGE_CONTENT_QUERY, variables: {locale: locale} }));
+
+  const {data:{ home }}: HomeQueryProps = await performRequest({
+    query: PAGE_CONTENT_QUERY,
+    variables: {
+      locale: locale
+    }
+  });
   return home;
 }
 
 const Home: FC<PageContextType> = async (props) => {
+  console.log('==> home locale', props.params.locale, props.params);
   const home = await query({locale: props.params.locale});
 
   const t = await getTranslations('Index');

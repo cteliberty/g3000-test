@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import { FC } from 'react';
 import { TranslateRouteType } from 'src/components/atoms/LanguageSwitcher';
 import Layout from 'src/components/template/layout';
@@ -26,7 +27,7 @@ type queryType = {
 
 type PageSlugQueryRouteProps = {
   data: {
-    contentPage: SlugLocaleQueryType;
+    contentPage?: SlugLocaleQueryType;
   };
 }
 
@@ -44,7 +45,7 @@ const queryRoute = async (props:queryType) : Promise<TranslateRouteType[]> => {
     }
   }`;
 
-  const {data:{ contentPage: { _allSlugLocales } }}: PageSlugQueryRouteProps = await performRequest({
+  const {data:{ contentPage}}: PageSlugQueryRouteProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
       locale: locale,
@@ -52,13 +53,14 @@ const queryRoute = async (props:queryType) : Promise<TranslateRouteType[]> => {
     }
   });
 
+  if (!contentPage) notFound();
+  const {_allSlugLocales} = contentPage;
   _allSlugLocales.map((slugLocales) => {
     translateRoute.push({
       locale: slugLocales.locale,
       route: `/page/${slugLocales.value}`,
     })
   })
-
 
   return translateRoute;
 }

@@ -10,7 +10,7 @@ export type DatocmsRequest = {
   variables?: {
     slug?: string;
     subSlug?: string;
-    locale: string;
+    locale?: string;
   };
   preview?: boolean;
   includeDrafts?: boolean

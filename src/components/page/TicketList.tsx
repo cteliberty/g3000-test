@@ -17,7 +17,7 @@ export const ticketListSlug: TranslateSlugType[] = [
     slug: 'billetterie'
   },
   {
-    locale: 'fr',
+    locale: 'es',
     slug: 'entradas'
   }
 ];
