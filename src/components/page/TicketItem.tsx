@@ -22,12 +22,6 @@ type TicketListQueryProps = {
   };
 }
 
-type PageSlugQueryRouteProps = {
-  data: {
-    product?: SlugLocaleQueryType;
-  };
-}
-
 type queryType = {
   locale: string;
   subSlug: string;
@@ -35,6 +29,12 @@ type queryType = {
 
 
 const queryRoute = async (props:queryType, translateSlug: TranslateSlugType[]) : Promise<TranslateRouteType[]> => {
+  type PageSlugQueryRouteProps = {
+    data: {
+      product?: SlugLocaleQueryType;
+    };
+  }
+  
   const {subSlug, locale} = props;
   const translateRoute:TranslateRouteType[] = [];
 

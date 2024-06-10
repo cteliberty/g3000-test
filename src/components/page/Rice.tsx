@@ -31,17 +31,17 @@ export type PageSlugProps = {
   }
 };
 
-type TicketListQueryProps = {
-  data: {
-    rice: PageSlugProps;
-  };
-}
-
 type queryType = {
   locale: string;
 }
 
 const queryData = async (props:queryType) : Promise<PageSlugProps> => {
+  type TicketListQueryProps = {
+    data: {
+      rice: PageSlugProps;
+    };
+  }
+  
   const {locale} = props;
   const PAGE_CONTENT_QUERY = `query RiceQuery($locale: SiteLocale) {
     rice(locale: $locale) {

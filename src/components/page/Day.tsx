@@ -31,17 +31,17 @@ export type PageSlugProps = {
   }
 };
 
-type TicketListQueryProps = {
-  data: {
-    day: PageSlugProps;
-  };
-}
-
 type queryType = {
   locale: string;
 }
 
 const queryData = async (props:queryType) : Promise<PageSlugProps> => {
+  type TicketListQueryProps = {
+    data: {
+      day: PageSlugProps;
+    };
+  }
+  
   const {locale} = props;
   const PAGE_CONTENT_QUERY = `query DayQuery($locale: SiteLocale) {
     day(locale: $locale) {

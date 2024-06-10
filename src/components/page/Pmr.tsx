@@ -31,17 +31,17 @@ export type PageSlugProps = {
   }
 };
 
-type TicketListQueryProps = {
-  data: {
-    pmr: PageSlugProps;
-  };
-}
-
 type queryType = {
   locale: string;
 }
 
 const queryData = async (props:queryType) : Promise<PageSlugProps> => {
+  type TicketListQueryProps = {
+    data: {
+      pmr: PageSlugProps;
+    };
+  }
+  
   const {locale} = props;
   const PAGE_CONTENT_QUERY = `query PmrQuery($locale: SiteLocale) {
     pmr(locale: $locale) {

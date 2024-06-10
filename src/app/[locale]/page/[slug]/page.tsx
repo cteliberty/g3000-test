@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation';
 import { FC } from 'react';
 import { TranslateRouteType } from 'src/components/atoms/LanguageSwitcher';
 import Layout from 'src/components/template/layout';
+import { responsiveImageFragment } from 'src/fragments/responsiveImageFragment';
 import { performRequest } from 'src/lib/datocms';
+import getMetaData, { PageSeoType } from 'src/lib/getMetataDato';
+import { seoQuery } from 'src/query/seoQuery';
 import { PageContextType } from 'src/type/page';
 import { SlugLocaleQueryType } from 'src/type/slugLocale';
 
@@ -14,24 +17,18 @@ export type PageSlugProps = {
   }
 };
 
-type PageSlugQueryProps = {
-  data: {
-    contentPage: PageSlugProps;
-  };
-}
-
 type queryType = {
   locale: string;
   slug: string;
 }
 
-type PageSlugQueryRouteProps = {
-  data: {
-    contentPage?: SlugLocaleQueryType;
-  };
-}
-
 const queryRoute = async (props:queryType) : Promise<TranslateRouteType[]> => {
+  type PageSlugQueryRouteProps = {
+    data: {
+      contentPage?: SlugLocaleQueryType;
+    };
+  }
+
   const {locale, slug} = props;
 
   const translateRoute:TranslateRouteType[] = [];
@@ -66,6 +63,12 @@ const queryRoute = async (props:queryType) : Promise<TranslateRouteType[]> => {
 }
 
 const queryData = async (props:queryType) : Promise<PageSlugProps> => {
+  type PageSlugQueryProps = {
+    data: {
+      contentPage: PageSlugProps;
+    };
+  }
+
   const {locale, slug} = props;
   const PAGE_CONTENT_QUERY = `query ContentPageQuery($slug: String, $locale: SiteLocale) {
     contentPage(locale: $locale, filter: {slug: {eq: $slug}}) {
@@ -92,6 +95,7 @@ const PageSlug: FC<PageContextType> = async (props) => {
     locale: props.params.locale,
     slug: props.params.slug,
   }
+
   const pageSlug = await queryData(params);
   const t = await getTranslations('Index');
 
@@ -103,6 +107,40 @@ const PageSlug: FC<PageContextType> = async (props) => {
       <p>{pageSlug.hero[0].description}</p> */}
     </Layout>
   );
+}
+
+export const generateMetadata = async (props: PageContextType) => {
+  const params = {
+    locale: props.params.locale,
+    slug: props.params.slug,
+  }
+
+  type PageSlugSeoQuery = {
+    data: {
+      contentPage: PageSeoType
+      ;
+    };
+  }
+
+  const PAGE_CONTENT_QUERY = `
+    query ContentPageSEOQuery($slug: String, $locale: SiteLocale) {
+    contentPage(locale: $locale, filter: {slug: {eq: $slug}}) {
+        ${seoQuery}
+      }
+    }
+    ${responsiveImageFragment}
+  `;
+
+  const {data:{ contentPage }}: PageSlugSeoQuery = await performRequest({
+    query: PAGE_CONTENT_QUERY,
+    variables: params,
+  });
+
+  return await getMetaData({
+    locale: params.locale,
+    pageSeo: contentPage,
+    translateRout: await queryRoute(params),
+  });
 }
 
 export default PageSlug;

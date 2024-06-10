@@ -1,6 +1,7 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
-import Agenda, { agendaSlug } from 'src/components/page/Agenda';
+import Agenda, { agendaMetadata, agendaSlug } from 'src/components/page/Agenda';
 import Come, { comeSlug } from 'src/components/page/Come';
 import Day, { daySlug } from 'src/components/page/Day';
 import Faq, { faqSlug } from 'src/components/page/Faq';
@@ -44,6 +45,27 @@ const pages: Record<string, FC<PageContextType>> = {
   ...getPageComponent(pressSlug, Press),
 }
 
+type PromiseMetadata = (props: PageContextType) => Promise<Metadata>
+
+const getMetaData = (pageSlug: TranslateSlugType[], metadata : PromiseMetadata): Record<string, PromiseMetadata> => {
+  let objet = {};
+  
+  pageSlug.map((slug) => {
+    objet = {
+      ...objet,
+      ...{
+        [slug.slug]: metadata
+      }
+    }
+  })
+  return objet;
+}
+
+const metadata: Record<string, PromiseMetadata> = {
+  ...getMetaData(agendaSlug, agendaMetadata),
+  // ALL PAGE
+}
+
 const PageSlug: FC<PageContextType> = async (props) => {
   const Component = pages[props.params.slug];
   if (Component) {
@@ -51,6 +73,16 @@ const PageSlug: FC<PageContextType> = async (props) => {
   }
 
   notFound();
+}
+
+
+export const generateMetadata = async (props: PageContextType) => {
+  const getMetadata = metadata[props.params.slug];
+  if (getMetadata) {
+    return await getMetadata(props)
+  }
+
+  return {};
 }
 
 export default PageSlug;

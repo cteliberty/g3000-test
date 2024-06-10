@@ -4,6 +4,9 @@ import Layout from 'src/components/template/layout'
 import { performRequest } from 'src/lib/datocms';
 import { PageContextType } from 'src/type/page';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import getMetaData, { PageSeoType } from 'src/lib/getMetataDato';
+import { seoQuery } from 'src/query/seoQuery';
+import { responsiveImageFragment } from 'src/fragments/responsiveImageFragment';
 
 export type HomeProps = {
   hero: {
@@ -13,19 +16,19 @@ export type HomeProps = {
   }[];
 };
 
-type HomeQueryProps = {
-  data: {
-    home: HomeProps;
-  };
-}
 
 type queryType = {
   locale: string;
 }
 
 const query = async (props:queryType) : Promise<HomeProps> => {
-  const {locale} = props;
+  type HomeQueryProps = {
+    data: {
+      home: HomeProps;
+    };
+  }
 
+  const {locale} = props;
   const PAGE_CONTENT_QUERY = `query HomeQuery($locale: SiteLocale) {
     home(locale: $locale) {
       hero {
@@ -36,7 +39,7 @@ const query = async (props:queryType) : Promise<HomeProps> => {
     }
   }`;
 
-  console.log('==> home', await performRequest({ query: PAGE_CONTENT_QUERY, variables: {locale: locale} }));
+  console.log('==> home', locale,  PAGE_CONTENT_QUERY,  await performRequest({ query: PAGE_CONTENT_QUERY, variables: {locale: locale} }));
 
   const {data:{ home }}: HomeQueryProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
@@ -61,6 +64,35 @@ const Home: FC<PageContextType> = async (props) => {
       <SpeedInsights />
     </Layout>
   );
+}
+
+export const generateMetadata = async ({ params }: PageContextType) => {
+  type HomeSeoQuery = {
+    data: {
+      home: PageSeoType
+      ;
+    };
+  }
+  const PAGE_CONTENT_QUERY = `
+    query HomeSEOQuery($locale: SiteLocale) {
+      home(locale: $locale) {
+        ${seoQuery}
+      }
+    }
+    ${responsiveImageFragment}
+  `;
+
+  const {data:{ home }}: HomeSeoQuery = await performRequest({
+    query: PAGE_CONTENT_QUERY,
+    variables: {
+      locale: params.locale
+    },
+  });
+
+  return await getMetaData({
+    locale: params.locale,
+    pageSeo: home,
+  });
 }
 
 export default Home;
