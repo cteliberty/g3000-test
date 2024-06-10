@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import Layout from 'src/components/template/layout'
 import { performRequest } from 'src/lib/datocms';
 import { PageContextType } from 'src/type/page';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export type HomeProps = {
   hero: {
@@ -57,6 +58,7 @@ const Home: FC<PageContextType> = async (props) => {
       <h2>{home.hero[0].title}</h2>
       <h3>{home.hero[0].subtitle}</h3>
       <p>{home.hero[0].description}</p>
+      <SpeedInsights />
     </Layout>
   );
 }
