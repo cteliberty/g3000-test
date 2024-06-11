@@ -1,0 +1,40 @@
+.t_TicketProductList {
+  $self: &;
+  $productCard: '.m_ProductCardContent';
+  padding-top: 0;
+
+  &_list {
+    flex-wrap: wrap;
+  }
+
+  &_wrapper {
+    padding-right: 45px;
+  }
+
+  #{$productCard} {
+    &_item {
+      width: 300px;
+    }
+
+    &_image img {
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: $screen-xs-min) {
+    #{$productCard}_item {
+      width: calc(50% - 10px);
+    }
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    &_wrapper {
+      padding-right: 0;
+    }
+
+    #{$productCard}_item {
+      width: calc(33.33% - 24px);
+    }
+  }
+}

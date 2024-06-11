@@ -1,0 +1,13 @@
+.t_Layout {
+  $self: &;
+  scroll-padding-top: 65px;
+
+  &_container {
+    transition: margin-top 500ms;
+    transition: filter 500ms;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    scroll-padding-top: 90px;
+  }
+}

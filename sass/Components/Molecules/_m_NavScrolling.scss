@@ -1,0 +1,115 @@
+.m_NavScrolling {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 45px;
+  position: sticky;
+  z-index: 2;
+  top: 64px;
+  background-color: $color-white-45;
+  backdrop-filter: blur(25px);
+
+  &_scroll {
+    opacity: 0;
+    margin-bottom: 10px;
+    position: sticky;
+    z-index: 3;
+    bottom: 127px;
+    padding-right: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    transition: opacity 0.3s ease-in-out;
+
+    &_switch {
+      @include legend;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      gap: 5px;
+      width: 40px;
+      border-radius: 100px;
+      background-color: $color-greyLight;
+      box-shadow: 0 0 10px 0 rgba($color-black, 0.20);
+    }
+  }
+
+  &_chevron span {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  &_down {
+    transform: rotate(-180deg);
+  }
+
+  &_progress {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    overflow: hidden;
+    background-color: $color-greyLight;
+    backdrop-filter: blur(25px);
+  }
+
+  &_loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: $color-black;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    padding-bottom: 20px;
+    top: 89px;
+
+    + .t_TicketProductList_wrapper {
+      padding-top: 40px;
+    }
+
+    &_inner {
+      display: flex;
+      gap: 60px;
+    }
+
+    &_title {
+      @include h5;
+      padding-top: 20px;
+      position: relative;
+      color: $color-grey;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+
+      &.active,
+      &:hover {
+        color: $color-black;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    &:before {
+      left: -40px;
+      width: calc(100% + 80px);
+    }
+
+    &_inner {
+      gap: 120px;
+    }
+  }
+}
+
+[data-section] {
+  scroll-margin-top: 70px;
+
+  @media screen and (min-width: $screen-m-min) {
+    scroll-margin-top: 158px;
+  }
+}

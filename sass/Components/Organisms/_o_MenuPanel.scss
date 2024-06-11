@@ -1,0 +1,90 @@
+.o_MenuPanel {
+  @include sidePanel;
+
+  left: -100vw;
+  transition: left 300ms ease-in-out;
+  animation: 300ms ease-in-out leftPanelIn;
+
+  &_switchLang {
+    margin-bottom: 50px;
+  }
+
+  &_menu {
+    flex: auto;
+  }
+
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &_item {
+    a {
+      @include fontStyle(18px, 600);
+      color: $color-white;
+      text-decoration: none;
+    }
+  }
+
+  &_button {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+
+    .a_Button {
+      min-width: auto;
+    }
+  }
+
+  @media screen and (min-width: $screen-xxs-min) {
+    left: -$side-panel-width;
+  }
+
+  @media screen and (max-width: $screen-m-max) {
+    &_subMenu {
+      @include bodyBig;
+    }
+
+    &_back {
+      cursor: pointer;
+      padding-top: 15px;
+      padding-bottom: 30px;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        @include fontIcon;
+
+        color: $color-white;
+        content: $icon_pdm-chevron-left;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+        margin-right: 5px;
+      }
+    }
+
+    &_textBack {
+      border-bottom: 1px solid $color-white;
+    }
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    left: -$side-panel-width-m;
+  }
+}
+
+.leftPanelOpen .o_MenuPanel {
+  left: 0;
+}
+
+@keyframes leftPanelIn {
+  from {
+    left: -100vw;
+  }
+  to {
+    left: 0;
+  }
+}

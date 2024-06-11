@@ -1,0 +1,88 @@
+// to set icon font
+@mixin fontIcon {
+  font-family: 'icon-pdm' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Wrapper
+@mixin wrapper($size: $wrapper) {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: $size;
+}
+
+// statusIconBg
+@mixin statusIconBackground($color) {
+  &::before {
+    background-color: rgba($color, 0.3);
+  }
+
+  &::after {
+    background-color: $color;
+  }
+}
+
+@mixin sidePanel {
+  position: absolute;
+  top: -25px;
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+
+  &::before {
+    content: '';
+    background-color: $color-black-60;
+    backdrop-filter: blur(50px);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+
+  &_content {
+    color: $color-white;
+    padding: 30px 14px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  &_title {
+    @include fontStyle(32px, 700, 38px);
+  }
+
+  @media screen and (min-width: $screen-xxs-min) {
+    width: $side-panel-width;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    width: $side-panel-width-m;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    top: 0;
+  }
+}
+
+//shadow
+@mixin shadow {
+  box-shadow: $shadow;
+}

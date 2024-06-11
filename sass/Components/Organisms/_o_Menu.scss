@@ -1,0 +1,165 @@
+.o_Menu {
+  $self: &;
+
+  a {
+    color: $color-white;
+    text-decoration: none;
+  }
+
+  &_list {
+    display: flex;
+  }
+
+  &_link {
+    cursor: pointer;
+    color: $color-white;
+  }
+
+  &_text {
+    @include fontStyle(21px, 600, 26px);
+    display: block;
+  }
+
+  @media screen and (max-width: $screen-m-max) {
+    &_list {
+      margin-left: -14px;
+      margin-right: -14px;
+      flex-direction: column;
+    }
+
+    &_item {
+      margin-top: -1px;
+
+      &:not(&-button) {
+        &:focus,
+        &:hover {
+          background-color: $color-greyDark;
+        }
+      }
+
+      &-button {
+        margin-bottom: 10px;
+      }
+    }
+
+    &_link {
+      margin-left: 18px;
+      margin-right: 18px;
+      border-bottom: solid 1px $color-greyDark;
+      display: block;
+      width: calc(100% - 36px);
+
+      &-button {
+        padding: 10px 20px;
+        display: inline-block;
+        border: none;
+        border-radius: 100px;
+        background-color: $color-white-35;
+        backdrop-filter: blur(25px);
+      }
+
+      &-noBorder {
+        border: none;
+        cursor: initial;
+      }
+    }
+
+    &_text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding-top: 20px;
+      padding-bottom: 15px;
+
+      &::after {
+        @include fontIcon;
+
+        color: $color-white;
+        content: $icon_pdm-chevron-right;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-l-min) {
+    position: relative;
+
+    &_list {
+      align-items: stretch;
+    }
+
+    &_item {
+      padding-left: 15px;
+      padding-right: 15px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &:hover,
+      &:focus {
+        #{$self} {
+          &_text {
+            &::after {
+              width: 100%;
+              left: 0;
+            }
+          }
+
+          &_subMenu {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &_link {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .a_Button {
+        height: 50px;
+
+        &_label {
+          @include subtitle;
+        }
+      }
+    }
+
+    &_text {
+      @include bodyBig;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -10px;
+        height: 2px;
+        border-radius: 2px;
+        background-color: $color-white;
+        width: 0;
+        left: 50%;
+        transition: all 300ms;
+      }
+    }
+
+    &_subMenu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      margin-left: -340px;
+      width: 680px;
+      padding-top: 10px;
+    }
+  }
+}

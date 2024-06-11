@@ -1,0 +1,17 @@
+.o_ListProduct {
+  $self: &;
+  display: flex;
+  gap: 20px;
+
+  &#{$self}-experience {
+    gap: initial;
+  }
+
+  &_slider {
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    gap: 35px;
+  }
+}

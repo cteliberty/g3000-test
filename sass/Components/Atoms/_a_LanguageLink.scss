@@ -1,0 +1,18 @@
+.a_LanguageLink {
+  $self: &;
+  @include bodyMedium; //bodyBig
+
+  display: flex;
+
+  &_flag {
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &:hover {
+    #{$self}_locale {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.o_PurchasePanel {
+  @include sidePanel;
+
+  right: -100vw;
+  transition: right 300ms ease-in-out;
+  animation: 300ms ease-in-out rightPanelIn;
+
+  &::before {
+    backdrop-filter: blur(25px);
+  }
+
+  &_content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  &_productList {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &_product {
+    .m_ProductCardContent {
+      background-color: $color-white-15;
+      backdrop-filter: none;
+    }
+  }
+
+  &_button {
+    margin-top: 20px;
+  }
+
+  @media screen and (min-width: $screen-xxs-min) {
+    right: -$side-panel-width;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    right: -$side-panel-width-m;
+  }
+}
+
+.rightPanelOpen .o_PurchasePanel {
+  right: 0;
+}
+
+@keyframes rightPanelIn {
+  from {
+    right: -100vw;
+  }
+  to {
+    right: 0;
+  }
+}

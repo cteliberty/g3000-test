@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-import LanguageSwitcher, { TranslateRouteType } from '~atoms/LanguageSwitcher';
+import { TranslateRouteType } from '~atoms/LanguageSwitcher';
 import Menu from '~organisms/Menu';
+import LanguageSwitcherContainer from '~molecules/LanguageSwitcherContainer';
 
 type HeaderProps = {
   translateRout?: TranslateRouteType[];
@@ -16,7 +17,9 @@ const Header: FC<HeaderProps> = (props) => {
       <Link href="/">Home</Link>
       <Menu />
 
-      <LanguageSwitcher translateRout={translateRout} />
+      <div style={{ position: 'relative' }}>
+        <LanguageSwitcherContainer translateRout={translateRout} />
+      </div>
     </div>
   );
 };

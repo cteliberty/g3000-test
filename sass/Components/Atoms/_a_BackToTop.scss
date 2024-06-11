@@ -1,0 +1,42 @@
+.a_BackToTop {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background-color: $color-black;
+  color: $color-white;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+
+  &_wrapper {
+    opacity: 0;
+    margin-bottom: 26px;
+    position: sticky;
+    z-index: 3;
+    bottom: 76px;
+    padding-right: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+
+    &_wrapper {
+      padding-right: 30px;
+    }
+  }
+
+  @media screen and (min-width: $screen-l-min) {
+    &_wrapper {
+      margin-bottom: 40px;
+      bottom: 40px;
+    }
+  }
+}

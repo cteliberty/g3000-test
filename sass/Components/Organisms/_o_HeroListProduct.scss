@@ -1,0 +1,15 @@
+.o_HeroListProduct {
+  flex-direction: column;
+  gap: 10px;
+  width: 340px;
+
+  .m_ProductCardContent {
+    background-color: $color-grey-35;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    .m_ProductCardContent:hover {
+      background-color: $color-white-45;
+    }
+  }
+}

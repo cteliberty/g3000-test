@@ -1,0 +1,16 @@
+.a_ButtonIcon {
+  @include defaultColorBtn($radius: 50%);
+  @include styleBtn;
+  @include fontStyle(16px, 600, 20px);
+
+  $self: &;
+  margin: 0 3px;
+  width: 45px;
+  height: 45px;
+
+  &-small {
+    margin: 0;
+    width: 40px;
+    height: 40px;
+  }
+}

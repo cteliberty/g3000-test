@@ -1,0 +1,224 @@
+.t_SliderExperience {
+  $thumbs: '.m_SlideThumbsExperience';
+
+  &_fat {
+    width: 100%;
+    overflow: hidden;
+
+    .swiper-horizontal > .swiper-pagination-bullets,
+    .swiper-pagination-horizontal.swiper-pagination-bullets {
+      top: 289px;
+      right: 0;
+      left: inherit;
+      transform: none;
+    }
+
+    .swiper {
+      &-button-prev,
+      &-button-next,
+      &-pagination-bullet {
+          background-color: $color-greyDark;
+      }
+
+      &-button {
+        &-prev,
+        &-next {
+          margin: 0;
+          z-index: 11;
+          top: 301px;
+          width: 35px;
+          height: 35px;
+          border-radius: 100%;
+
+          &:after {
+            content: $icon_pdm-arrow;
+            font-size: 32px;
+            font-family: $icomoon-font-family;
+            color: $color-white;
+          }
+        }
+
+        &-prev {
+          left: 15%;
+
+          &:after {
+            margin-left: 25px;
+            transform: rotate(-90deg);
+          }
+        }
+
+        &-next {
+          right: 15%;
+
+          &:after {
+            margin-right: 25px;
+            transform: rotate(90deg);
+          }
+        }
+      }
+
+      &-pagination {
+        gap: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $color-black;
+        width: 100%;
+        height: 60px;
+
+        &-bullet {
+          width: 4px;
+          height: 4px;
+          opacity: 1;
+          transition: all 0.3s ease-in-out;
+
+          &-active {
+            background-color: $color_white;
+            border-radius: 100px;
+            width: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-xs-min) {
+    &_list {
+      max-height: 606px;
+    }
+
+    &_fat {
+      width: auto;
+      min-width: 58%;
+
+      .swiper-vertical > .swiper-pagination-bullets,
+      .swiper-pagination-vertical.swiper-pagination-bullets {
+        top: 0;
+        right: 0;
+        left: inherit;
+        transform: none;
+
+        .swiper-pagination-bullet {
+          margin: 0;
+        }
+      }
+
+      .swiper {
+        &-button {
+          &-prev,
+          &-next {
+            right: 17.5px;
+            left: inherit;
+            width: 45px;
+            height: 45px;
+
+            &:after {
+              font-size: 40px;
+              transform: rotate(90deg);
+              transition: margin 0.3s ease-in-out;
+            }
+          }
+
+          &-prev {
+            top: 20px;
+
+            &:after {
+              margin-top: 32px;
+              margin-left: 0;
+              transform: rotate(0deg);
+            }
+
+            &:hover:after {
+              margin-top: 22px;
+            }
+          }
+
+          &-next {
+            top: 172px;
+
+            &:after {
+              margin-bottom: 32px;
+              margin-right: 0;
+              transform: rotate(-180deg);
+            }
+
+            &:hover:after {
+              margin-bottom: 22px;
+            }
+          }
+        }
+
+        &-pagination {
+          flex-direction: column;
+          width: 80px;
+          height: 238px;
+
+          &-bullet {
+            &-active {
+              width: 4px;
+              height: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    &_thumbs {
+      position: relative;
+      z-index: 1;
+      justify-content: space-between;
+
+      &.swiper {
+        margin-left: 32px;
+        padding-left: 2px;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 3px;
+        width: 2px;
+        height: 100%;
+        background-color: $color-greyLight;
+        border-radius: 100px;
+      }
+
+      .swiper {
+        &-wrapper {
+          justify-content: space-between;
+          height: 100% !important;
+        }
+
+        &-slide {
+          height: auto !important;
+        }
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      #{$thumbs} {
+        color: $color-black;
+
+        &:before {
+          opacity: 1;
+          height: 100%;
+        }
+
+        &_title {
+          @include h5;
+        }
+
+        &_content {
+          height: auto;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    &_thumbs.swiper {
+      margin-left: 62px;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+// Font
+$font-text: 'Raleway';
+
+// colors
+$color-white: #ffffff;
+$color-black: #000000;
+$color-greyDark: #46484d;
+$color-grey: #999999;
+$color-greyLight: #d9d9d9;
+$color-main: #003d7c;
+
+// status
+$color-success: #33c427;
+$color-wrong: #ee9039;
+$color-error: #c42727;
+// opacity
+$color-white-15: rgba($color-white, 0.15);
+$color-white-45: rgba($color-white, 0.45);
+$color-white-35: rgba($color-white, 0.35);
+$color-white-25: rgba($color-white, 0.25);
+$color-lightGrey-25: rgba(208, 208, 208, 0.25);
+$color-grey-50: rgba(137, 137, 137, 0.5);
+$color-grey-35: rgba(93, 93, 93, 0.35);
+$color-darkGrey-15: rgba(44, 28, 28, 0.15);
+$color-black-30: rgba($color-black, 0.3);
+$color-black-55: rgba($color-black, 0.55);
+$color-black-60: rgba($color-black, 0.6);
+$color-black-70: rgba($color-black, 0.7);
+
+// shadow
+$shadow: 0px 4px 20px 0px $color-black-30;
+
+// wrapper
+$wrapper: 1440px;
+
+$side-panel-width: 310px;
+$side-panel-width-m: 350px;
+$herder-size-s: 65px;
+$herder-size: 180px;
+$herder-size-fixed: 90px;
+$infoLive-height-s: 50px;

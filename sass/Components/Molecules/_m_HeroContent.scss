@@ -1,0 +1,31 @@
+.m_HeroContent {
+  max-width: 660px;
+  transition: opacity 500ms;
+
+  &_provider {
+    @include legend;
+
+    img {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
+  &_title {
+    @include h1;
+  }
+
+  &_subtitle {
+    @include h4;
+  }
+
+  &_description {
+    @include subtitle;
+
+    margin-top: 20px;
+  }
+
+  &_button {
+    margin-top: 35px;
+  }
+}

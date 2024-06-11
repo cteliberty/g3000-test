@@ -1,0 +1,76 @@
+.m_SubMenuListLink {
+  $self: &;
+
+  display: block;
+
+  &_link {
+    a {
+      color: $color-white;
+      display: block;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: $screen-m-max) {
+    margin-left: -14px;
+    margin-right: -14px;
+
+    &-category {
+      padding-bottom: 15px;
+    }
+
+    &_link {
+      a {
+        padding: 0 18px;
+
+        &:hover,
+        &:focus {
+          background-color: $color-greyDark;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-l-min) {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    &_link {
+      width: calc(25% - 8px);
+
+      a {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        padding-top: 100%;
+        min-height: 0;
+        width: 100%;
+
+        &:focus {
+          .a_SubmenuLink_background {
+            &::before {
+              background: linear-gradient(0deg, $color-black-70 0%, $color-black-70 100%);
+            }
+          }
+        }
+      }
+    }
+
+    &-category {
+      #{$self} {
+        &_link {
+          width: calc(50% - 5px);
+
+          a {
+            padding-top: 56.89%;
+          }
+
+          .a_SubmenuLink_label {
+            margin-top: 16px;
+          }
+        }
+      }
+    }
+  }
+}

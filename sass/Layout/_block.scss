@@ -1,0 +1,15 @@
+.block {
+  padding: 50px 15px;
+
+  [class*="_list"] {
+    margin-top: 30px;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    padding: 100px 40px;
+
+    [class*="_list"] {
+      margin-top: 50px;
+    }
+  }
+}

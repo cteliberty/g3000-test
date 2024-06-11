@@ -1,0 +1,105 @@
+// Text
+@mixin fontSize(
+  $size: 18px,
+  $lineHeight: (
+    $size + 10px,
+  )
+) {
+  font-size: $size;
+  line-height: $lineHeight;
+}
+
+@mixin fontStyle(
+  $size: 18px,
+  $weight: 900,
+  $lineHeight: (
+    $size + 10px,
+  )
+) {
+  @include fontSize($size, $lineHeight);
+  font-weight: $weight;
+}
+
+@mixin h1 {
+  @include fontStyle(32px, 700, 38px);
+  text-transform: uppercase;
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(62px, normal);
+  }
+}
+
+@mixin h2 {
+  @include fontStyle(26px, 700, 30px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(42px, 50px);
+  }
+}
+
+@mixin h3 {
+  @include fontStyle(24px, 700, 32px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(32px, 38px);
+  }
+}
+
+@mixin h4 {
+  @include fontStyle(22px, 200, 28px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(32px, 38px);
+  }
+}
+
+@mixin h5 {
+  @include fontStyle(21px, 800, 26px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(24px, 28px);
+  }
+}
+
+@mixin subtitle {
+  @include fontStyle(18px, 600, 22px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(21px, 26px);
+  }
+}
+
+@mixin bodyBig {
+  //subtitle
+  @include fontStyle(18px, 600, 22px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(21px, 26px);
+  }
+}
+
+@mixin bodyMedium {
+  //body big
+  @include fontStyle(16px, 600, 20px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(18px, 22px);
+  }
+}
+
+@mixin body($weight: 400) {
+  //body regular
+  @include fontStyle(14px, $weight, 18px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(16px, 20px);
+  }
+}
+
+@mixin legend($weight: 400) {
+  @include fontStyle(12px, $weight, 16px);
+
+  @media screen and (min-width: $screen-m-min) {
+    @include fontSize(14px, 18px);
+  }
+}

@@ -1,0 +1,16 @@
+.m_HeaderBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  &_title {
+    @include h2;
+  }
+
+  &_subtitle {
+    @include h4;
+    margin-top: 10px;
+  }
+}

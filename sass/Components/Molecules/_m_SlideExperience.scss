@@ -1,0 +1,49 @@
+.m_SlideExperience {
+  position: relative;
+  height: 100%;
+
+  &_image {
+    margin-bottom: 60px;
+    height: 290px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media screen and (min-width: $screen-xs-min) {
+    &_image {
+      margin-bottom: 0;
+      height: 100%;
+    }
+
+    &_nav {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      width: 80px;
+      height: 100%;
+      background: $color-white-25;
+      backdrop-filter: blur(25px);
+      color: $color-white;
+    }
+
+    &_title {
+      @include h5;
+      padding: 30px 0;
+      height: calc(100% - 238px);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      writing-mode: vertical-rl;
+      text-transform: uppercase;
+      transform: rotate(180deg);
+    }
+  }
+}

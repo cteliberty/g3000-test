@@ -1,0 +1,10 @@
+.m_SubMenu {
+  @media screen and (min-width: $screen-l-min) {
+    @include shadow;
+
+    padding: 30px;
+    border-radius: 5px;
+    background-color: $color-white;
+    display: block;
+  }
+}

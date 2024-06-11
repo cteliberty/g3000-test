@@ -1,0 +1,165 @@
+.t_SliderVisit {
+  position: relative;
+  height: 602px;
+
+  &_image {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    &:before {
+      background: linear-gradient(0deg, rgba($color-black, 0.65) 0%, rgba($color-black, 0.00) 39.6%),
+      linear-gradient(180deg, rgba($color-black, 0.50) 0%, rgba($color-black, 0.00) 32.5%),
+      linear-gradient(0deg, rgba($color-black, 0.15) 0%, rgba($color-black, 0.15) 100%);
+    }
+  }
+
+  &_body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    color: $color-white;
+  }
+
+  &_navigation {
+    padding: 0 15px;
+    position: absolute;
+    top: 30px !important;
+    left: 50% !important;
+    bottom: inherit !important;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+
+    .swiper-pagination-bullet {
+      @include subtitle;
+      margin: 0 !important;
+      padding-bottom: 7px;
+      opacity: 1;
+      position: relative;
+      width: auto;
+      height: auto;
+      color: $color-greyLight;
+      background-color: transparent;
+      border-radius: 0;
+      transition: all 0.3s ease-in-out;
+
+      &_bar,
+      &_progress {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        border-radius: 5px;
+        backdrop-filter: blur(25px);
+        transition: width 0.3s ease-in-out;
+      }
+
+      &_bar {
+        z-index: 1;
+        background-color: $color-grey;
+      }
+
+      &_progress {
+        z-index: 2;
+        background-color: $color-white;
+      }
+
+      &-start {
+        &.swiper-pagination-bullet-active {
+          @include h5;
+          color: $color-white;
+
+          .swiper-pagination-bullet {
+            &_bar {
+              width: 100%;
+            }
+
+            &_progress {
+              animation-name: countingBar;
+              animation-duration: 5.2s;
+              animation-timing-function: ease-in;
+              animation-iteration-count: 1;
+              animation-direction: alternate;
+              animation-fill-mode: forwards;
+            }
+          }
+        }
+      }
+
+      @keyframes countingBar {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+    }
+  }
+
+  &_slider {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &_title {
+    @include h2;
+  }
+
+  &_description {
+    @include subtitle;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    height: 934px;
+
+    &_navigation {
+      padding: 0 40px;
+      top: 100px !important;
+      align-items: center;
+      flex-direction: row;
+      gap: 60px;
+
+      .swiper-pagination-bullet {
+        padding-bottom: 18px;
+
+        &:before,
+        &:after {
+          height: 4px;
+        }
+
+        &-active:before {
+          width: 124px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1500px) {
+    &_navigation {
+      padding: 0;
+    }
+  }
+}

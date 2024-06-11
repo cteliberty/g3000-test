@@ -1,0 +1,108 @@
+// Button
+@mixin defaultColorBtn($radius: 100px) {
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  white-space: break-spaces;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-white-35;
+  color: $color-white;
+  transition: all 0.3s ease-in-out;
+  border-radius: $radius;
+
+  &:active {
+    background-color: $color-greyLight;
+    color: $color-black;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    &:hover {
+      background-color: $color-white;
+      color: $color-black;
+    }
+  }
+}
+
+@mixin styleBtn {
+  $self: &;
+
+  &-white,
+  &-black,
+  &-grey {
+    border: 1px solid;
+
+    &:active {
+      background-color: $color-greyDark;
+      color: $color-white;
+    }
+  }
+
+  &-white {
+    background-color: $color-white;
+    border-color: $color-white;
+    color: $color-black;
+
+    &#{$self}-outline {
+      background-color: transparent;
+      color: $color-white;
+
+      &:active {
+        background-color: $color-greyLight;
+        color: $color-black;
+      }
+    }
+  }
+
+  &-black {
+    background-color: $color-black;
+    border-color: $color-black;
+    color: $color-white;
+
+    &#{$self}-outline {
+      background-color: transparent;
+      color: $color-black;
+
+      &:active {
+        background-color: $color-greyDark;
+        color: $color-white;
+      }
+    }
+  }
+
+  &-grey {
+    background-color: $color-grey-35;
+    border-color: transparent;
+    color: $color-white;
+    backdrop-filter: blur(25px);
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    &-white {
+      &:hover {
+        background-color: $color-grey;
+        color: $color-white;
+      }
+
+      &#{$self}-outline:hover {
+        background-color: $color-white;
+        color: $color-black;
+      }
+    }
+
+    &-black,
+    &-grey {
+      &:hover {
+        background-color: $color-greyDark;
+        color: $color-white;
+      }
+
+      &#{$self}-outline:hover {
+        background-color: $color-black;
+        color: $color-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+.m_ProductCardContent {
+  $self: &;
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $color-lightGrey-25;
+  backdrop-filter: blur(25px);
+  transition: all 0.3s ease-in-out;
+
+  &_item,
+  &_image {
+    position: relative;
+  }
+
+  &_item {
+    max-width: 100%;
+    height: 400px;
+
+    #{$self},
+    #{$self}_buttons {
+      position: absolute;
+      z-index: 2;
+      right: 12px;
+    }
+
+    #{$self} {
+      top: 15px;
+      width: calc(100% - 24px);
+      background: $color-grey-35;
+      color: $color-white;
+
+      &_buttons {
+        bottom: 15px;
+      }
+    }
+  }
+
+  &_image {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100%;
+
+    img {
+      display: block;
+    }
+
+    &:after {
+      content: '';
+      background: linear-gradient(180deg, rgba($color-black, 0) 70%, rgba($color-black, 0.75) 100%);
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: background 0.3s ease-in-out;
+    }
+  }
+
+  &_tag {
+    @include fontStyle(14px, 500, 18px);
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    display: inline-flex;
+    border-radius: 4px;
+    background-color: $color-greyDark;
+    color: $color-greyLight;
+    backdrop-filter: blur(25px);
+
+    &-isImportant {
+      background-color: $color-white;
+      color: $color-greyDark;
+    }
+  }
+
+  &_header {
+    margin-bottom: 10px;
+  }
+
+  &_title {
+    @include subtitle;
+  }
+
+  &_description {
+    @include legend;
+  }
+
+  &_buttons,
+  &_footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  &_buttons {
+    width: calc(100% - 24px);
+  }
+
+  &_footer {
+    #{$self}_priceLabel {
+      margin-top: 0;
+    }
+  }
+
+  &_priceLabel {
+    @include bodyMedium;
+    margin-top: 13px;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    &:hover {
+      background-color: $color-white-45;
+    }
+
+    &_image {
+      transition: all 0.3s ease-in-out;
+    }
+
+    &_tag {
+      margin-bottom: 13px;
+    }
+
+    &_item {
+      height: 450px;
+
+      #{$self},
+      #{$self}_buttons {
+        right: 25px;
+      }
+
+      #{$self} {
+        top: 20px;
+        width: calc(100% - 50px);
+
+        &:hover {
+          background-color: $color-grey-35;
+        }
+      }
+
+      #{$self}_buttons {
+        bottom: 20px;
+      }
+
+      &:hover {
+        #{$self}_image {
+          @include shadow;
+
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &_buttons {
+      width: calc(100% - 50px);
+    }
+  }
+}

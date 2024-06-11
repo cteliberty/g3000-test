@@ -1,0 +1,9 @@
+.m_FooterOffer {
+  &_title {
+    text-transform: uppercase;
+  }
+
+  &_subtitle {
+    @include bodyMedium;
+  }
+}

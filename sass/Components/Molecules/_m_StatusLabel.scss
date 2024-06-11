@@ -1,0 +1,19 @@
+.m_StatusLabel {
+  display: flex;
+  align-items: center;
+
+  &_icon {
+    margin-right: 10px;
+  }
+
+  &_label {
+    @include bodyMedium;
+    text-transform: uppercase;
+  }
+
+  &_detail {
+    @include body;
+
+    margin-left: 5px;
+  }
+}

@@ -6,7 +6,7 @@ import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 import { responsiveImageFragment } from '~fragments/responsiveImageFragment';
 import { performRequest } from '~lib/datocms';
 import { TranslateRouteType } from '~atoms/LanguageSwitcher';
-import { locales } from 'navigation';
+import { locales } from '~source/navigation';
 
 export type DefaultSeoType = {
   facebookPageUrl: string;

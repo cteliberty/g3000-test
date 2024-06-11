@@ -1,0 +1,49 @@
+.m_Popover {
+  $self: &;
+  position: relative;
+  display: inline-block;
+
+  &_content {
+    position: relative;
+  }
+
+  &_triangle {
+    display: none;
+    pointer-events: none;
+    height: 0;
+    width: 0;
+    border-right: 7px solid transparent;
+    border-bottom: 11px solid $color-black;
+    border-left: 7px solid transparent;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: calc(50% - 7px);
+    z-index: 2;
+  }
+
+  &_label {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    top: calc(100% + 16px);
+    font-size: 12px;
+    white-space: nowrap;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 5px 8px;
+    left: -50%;
+    margin-left: -100%;
+    z-index: 2;
+  }
+
+  &-hover {
+    &:hover {
+      #{$self} {
+        &_triangle,
+        &_label {
+          display: block;
+        }
+      }
+    }
+  }
+}

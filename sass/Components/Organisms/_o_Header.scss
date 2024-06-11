@@ -1,0 +1,154 @@
+.o_Header {
+  $self: &;
+
+  padding: 0 15px;
+  height: $herder-size-s;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 25px;
+  left: 0;
+  width: 100%;
+  margin-bottom: -$herder-size-s;
+  transition: all 300ms;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    transition: all 300ms;
+    z-index: -1;
+  }
+
+  &.fixed {
+    z-index: 10;
+    top: -1px;
+    padding-top: 1px;
+
+    &::before {
+      transition-delay: 300ms;
+      background-color: rgba($color-black, 0.7);
+      backdrop-filter: blur(25px);
+    }
+
+    .o_PurchasePanel,
+    .o_MenuPanel {
+      top: 0;
+    }
+  }
+
+  &_logo {
+    a {
+      display: block;
+    }
+  }
+
+  &_menu {
+    position: relative;
+    z-index: 2;
+  }
+
+  &_content {
+    display: inline-flex;
+    flex: auto;
+    align-items: center;
+  }
+
+  &_switchLocal {
+    padding-left: 10px;
+    margin-right: 43px;
+  }
+
+  &_fastLink {
+    flex: auto;
+    text-align: right;
+  }
+
+  @media screen and (min-width: $screen-m-min) {
+    top: 0;
+    padding: 20px 40px;
+    height: $herder-size;
+    margin-bottom: -$herder-size;
+    align-items: flex-start;
+
+    &_logo {
+      img {
+        display: block;
+        width: 120px;
+        height: 140px;
+        transition: all 300ms;
+      }
+    }
+
+    &.fixed {
+      padding-top: 0;
+      padding-bottom: 0;
+      height: $herder-size-fixed;
+      align-items: center;
+
+      #{$self} {
+        &_logo {
+          img {
+            display: block;
+            width: 77px;
+            height: 90px;
+          }
+        }
+
+        &_menu {
+          top: 18px;
+        }
+
+        &_content {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-l-min) {
+    display: block;
+
+    &_left {
+      float: left;
+      display: flex;
+    }
+
+    &_switchLocal {
+      margin-top: 32px;
+    }
+
+    &_right {
+      float: right;
+      margin-top: 20px;
+    }
+
+    &_menu {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 38px;
+      text-align: center;
+      z-index: -1;
+      transition: top 300ms;
+
+      .o_Menu {
+        display: inline-block;
+      }
+    }
+
+    .m_LanguageSwitch_listLink {
+      @include shadow;
+
+      background-color: $color-white;
+
+      .a_LanguageLink_locale {
+        color: $color-black;
+      }
+    }
+  }
+}

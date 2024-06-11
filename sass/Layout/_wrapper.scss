@@ -1,0 +1,7 @@
+.wrapper {
+  @include wrapper;
+
+  &-min {
+    @include wrapper(1240px);
+  }
+}

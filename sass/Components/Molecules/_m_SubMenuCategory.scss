@@ -1,0 +1,152 @@
+.m_SubMenuCategory {
+  $self: &;
+
+  &_link {
+    width: 100%;
+  }
+
+  &_linkContent {
+    cursor: pointer;
+    display: block;
+  }
+
+  &_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &::after {
+      @include fontIcon;
+
+      font-size: 20px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  @media screen and (max-width: $screen-m-max) {
+    &_list {
+      margin-left: -14px;
+      margin-right: -14px;
+    }
+
+    &_item {
+      &:last-child {
+        &::after {
+          content: '';
+          display: block;
+          border-bottom: solid 1px $color-greyDark;
+          margin-left: 13px;
+          margin-right: 13px;
+          margin-top: -1px;
+        }
+      }
+
+      &.active {
+        #{$self} {
+          &_text::after {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    &_linkList {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      &.animate {
+        transition: max-height 300ms;
+      }
+      &.active {
+        max-height: none;
+      }
+    }
+
+    &_link {
+      display: block;
+      margin-top: -1px;
+
+      &::before {
+        content: '';
+        display: block;
+        margin-left: 13px;
+        margin-right: 13px;
+        border-top: solid 1px $color-greyDark;
+      }
+
+      &:not(&-button) {
+        &:focus,
+        &:hover {
+          background-color: $color-greyDark;
+        }
+      }
+    }
+
+    &_linkContent {
+      color: $color-white;
+      margin-left: 13px;
+      margin-right: 13px;
+    }
+
+    &_text {
+      @include fontStyle(21px, 600, 26px);
+      padding-top: 20px;
+      padding-bottom: 15px;
+
+      &::after {
+        display: inline-block;
+        color: $color-white;
+        content: $icon_pdm-chevron-down;
+        transition: transform 300ms;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-l-min) {
+    display: flex;
+    gap: 26px;
+    color: $color-grey;
+
+    &_list {
+      width: 250px;
+    }
+
+    &_item.active {
+      #{$self} {
+        &_link {
+          color: $color-black;
+        }
+
+        &_linkContent {
+          border-bottom: 1px solid $color-black;
+        }
+      }
+    }
+
+    &_linkContent {
+      border-bottom: 1px solid $color-grey;
+    }
+
+    &_text {
+      @include bodyMedium;
+      padding-top: 16px;
+      padding-bottom: 16px;
+
+      &::after {
+        content: $icon_pdm-chevron-right;
+      }
+    }
+
+    &_linkList {
+      flex: auto;
+    }
+
+    &_link {
+      color: $color-grey;
+    }
+  }
+}

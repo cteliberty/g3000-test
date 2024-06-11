@@ -1,0 +1,36 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  @include body;
+
+  margin: 0;
+  padding: 0;
+  color: $color-black;
+  font-family: $font-text;
+
+  &.open {
+    overflow: hidden;
+
+    .o_Header {
+      transition-delay: 0s;
+      &::before {
+        background-color: transparent;
+        backdrop-filter: none;
+        transition-delay: 0s;
+      }
+    }
+
+    .t_Layout_container {
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .m_HeroContent {
+      opacity: 0;
+    }
+  }
+}

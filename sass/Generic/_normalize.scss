@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+p,
+ul,
+figure,
+blockquote,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-size: inherit;
+  font-weight: normal;
+}
+
+ul {
+  list-style: outside none;
+}
+
+ol {
+  margin: 20px 0;
+  padding-left: 30px;
+
+  li {
+    padding: 5px 0;
+  }
+}
+
+input,
+textarea {
+  font-family: $font-text;
+}
+
+i,
+em {
+  font-style: italic;
+}
+
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: $font-text;
+}

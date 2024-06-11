@@ -1,0 +1,12 @@
+.m_InfoLink {
+  display: inline-flex;
+  gap: 10px;
+  flex-direction: column;
+
+  .m_Popover {
+    &_label {
+      left: 0;
+      margin: 0;
+    }
+  }
+}
