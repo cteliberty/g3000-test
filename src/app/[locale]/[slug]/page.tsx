@@ -1,34 +1,38 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
-import Agenda, { agendaMetadata, agendaSlug } from 'src/components/page/Agenda';
-import Come, { comeSlug } from 'src/components/page/Come';
-import Day, { daySlug } from 'src/components/page/Day';
-import Faq, { faqSlug } from 'src/components/page/Faq';
-import Hour, { hourSlug } from 'src/components/page/Hour';
-import Job, { jobSlug } from 'src/components/page/Job';
-import Live, { liveSlug } from 'src/components/page/Live';
-import Night, { nightSlug } from 'src/components/page/Night';
-import Pmr, { pmrSlug } from 'src/components/page/Pmr';
-import Press, { pressSlug } from 'src/components/page/Press';
-import Rice, { riceSlug } from 'src/components/page/Rice';
-import TicketList, { ticketListSlug } from 'src/components/page/TicketList';
-import { PageContextType } from 'src/type/page';
-import { TranslateSlugType } from 'src/type/translateSlug';
 
-const getPageComponent = (pageSlug: TranslateSlugType[], component : FC<PageContextType>): Record<string, FC<PageContextType>> => {
+import { PageContextType } from '~type/page';
+import { TranslateSlugType } from '~type/translateSlug';
+import Agenda, { agendaMetaData, agendaSlug } from '~page/Agenda';
+import Come, { comeSlug } from '~page/Come';
+import Day, { daySlug } from '~page/Day';
+import Faq, { faqSlug } from '~page/Faq';
+import Hour, { hourSlug } from '~page/Hour';
+import Job, { jobSlug } from '~page/Job';
+import Live, { liveSlug } from '~page/Live';
+import Night, { nightSlug } from '~page/Night';
+import Pmr, { pmrSlug } from '~page/Pmr';
+import Press, { pressSlug } from '~page/Press';
+import Rice, { riceSlug } from '~page/Rice';
+import TicketList, { ticketListSlug } from '~page/TicketList';
+
+const getPageComponent = (
+  pageSlug: TranslateSlugType[],
+  component: FC<PageContextType>
+): Record<string, FC<PageContextType>> => {
   let objet = {};
-  
+
   pageSlug.map((slug) => {
     objet = {
       ...objet,
       ...{
-        [slug.slug]: component
-      }
-    }
-  })
+        [slug.slug]: component,
+      },
+    };
+  });
   return objet;
-}
+};
 
 const pages: Record<string, FC<PageContextType>> = {
   ...getPageComponent(ticketListSlug, TicketList),
@@ -43,46 +47,49 @@ const pages: Record<string, FC<PageContextType>> = {
   ...getPageComponent(faqSlug, Faq),
   ...getPageComponent(jobSlug, Job),
   ...getPageComponent(pressSlug, Press),
-}
+};
 
-type PromiseMetadata = (props: PageContextType) => Promise<Metadata>
+// eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
+export type PromiseMetadata = (props: PageContextType) => Promise<Metadata>;
 
-const getMetaData = (pageSlug: TranslateSlugType[], metadata : PromiseMetadata): Record<string, PromiseMetadata> => {
+const getMetaData = (
+  pageSlug: TranslateSlugType[],
+  metadata: PromiseMetadata
+): Record<string, PromiseMetadata> => {
   let objet = {};
-  
+
   pageSlug.map((slug) => {
     objet = {
       ...objet,
       ...{
-        [slug.slug]: metadata
-      }
-    }
-  })
+        [slug.slug]: metadata,
+      },
+    };
+  });
   return objet;
-}
+};
 
 const metadata: Record<string, PromiseMetadata> = {
-  ...getMetaData(agendaSlug, agendaMetadata),
+  ...getMetaData(agendaSlug, agendaMetaData),
   // ALL PAGE
-}
+};
 
 const PageSlug: FC<PageContextType> = async (props) => {
   const Component = pages[props.params.slug];
   if (Component) {
-    return <Component {...props} />
+    return <Component {...props} />;
   }
 
   notFound();
-}
-
+};
 
 export const generateMetadata = async (props: PageContextType) => {
-  const getMetadata = metadata[props.params.slug];
-  if (getMetadata) {
-    return await getMetadata(props)
+  const getMetaData = metadata[props.params.slug];
+  if (getMetaData) {
+    return await getMetaData(props);
   }
 
   return {};
-}
+};
 
 export default PageSlug;

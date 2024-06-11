@@ -1,25 +1,26 @@
 import { getTranslations } from 'next-intl/server';
 import { FC } from 'react';
-import Layout from 'src/components/template/layout';
-import { performRequest } from 'src/lib/datocms';
-import { PageContextType } from 'src/type/page';
-import { TranslateSlugType } from 'src/type/translateSlug';
+
+import Layout from '~template/layout';
+import { performRequest } from '~lib/datocms';
+import { PageContextType } from '~type/page';
+import { TranslateSlugType } from '~type/translateSlug';
 import { TranslateRouteType } from '../atoms/LanguageSwitcher';
-import convertSlugToRoute from 'src/lib/convertSlugToRoute';
+import convertSlugToRoute from '~lib/convertSlugToRoute';
 
 export const pmrSlug: TranslateSlugType[] = [
   {
     locale: 'en',
-    slug: 'prm-access'
+    slug: 'prm-access',
   },
   {
     locale: 'fr',
-    slug: 'acces-pmr'
+    slug: 'acces-pmr',
   },
   {
     locale: 'es',
-    slug: 'acceso-pmr'
-  }
+    slug: 'acceso-pmr',
+  },
 ];
 
 export const pmrRoute: TranslateRouteType[] = convertSlugToRoute(pmrSlug);
@@ -28,21 +29,21 @@ export type PageSlugProps = {
   title?: string;
   header: {
     description?: string;
-  }
+  };
 };
 
 type queryType = {
   locale: string;
-}
+};
 
-const queryData = async (props:queryType) : Promise<PageSlugProps> => {
+const queryData = async (props: queryType): Promise<PageSlugProps> => {
   type TicketListQueryProps = {
     data: {
       pmr: PageSlugProps;
     };
-  }
-  
-  const {locale} = props;
+  };
+
+  const { locale } = props;
   const PAGE_CONTENT_QUERY = `query PmrQuery($locale: SiteLocale) {
     pmr(locale: $locale) {
       title
@@ -52,19 +53,21 @@ const queryData = async (props:queryType) : Promise<PageSlugProps> => {
     }
   }`;
 
-  const {data:{ pmr }}: TicketListQueryProps = await performRequest({
+  const {
+    data: { pmr },
+  }: TicketListQueryProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
-      locale: locale
-    }
+      locale: locale,
+    },
   });
   return pmr;
-}
+};
 
 const Pmr: FC<PageContextType> = async (props) => {
   const params = {
     locale: props.params.locale,
-  }
+  };
 
   const pageSlug = await queryData(params);
 
@@ -77,6 +80,6 @@ const Pmr: FC<PageContextType> = async (props) => {
       <p>{pageSlug.hero[0].description}</p> */}
     </Layout>
   );
-}
+};
 
 export default Pmr;

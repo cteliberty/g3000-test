@@ -1,18 +1,18 @@
-import { getLocale } from "next-intl/server";
-import { agendaSlug } from "src/components/page/Agenda";
-import { comeSlug } from "src/components/page/Come";
-import { daySlug } from "src/components/page/Day";
-import { faqSlug } from "src/components/page/Faq";
-import { hourSlug } from "src/components/page/Hour";
-import { jobSlug } from "src/components/page/Job";
-import { liveSlug } from "src/components/page/Live";
-import { nightSlug } from "src/components/page/Night";
-import { pmrSlug } from "src/components/page/Pmr";
-import { pressSlug } from "src/components/page/Press";
-import { riceSlug } from "src/components/page/Rice";
-import { ticketListSlug } from "src/components/page/TicketList";
-import { PageLink } from "src/type/link";
-import { TranslateSlugType } from "src/type/translateSlug";
+import { getLocale } from 'next-intl/server';
+import { PageLink } from '~type/link';
+import { TranslateSlugType } from '~type/translateSlug';
+import { agendaSlug } from '~page/Agenda';
+import { comeSlug } from '~page/Come';
+import { daySlug } from '~page/Day';
+import { faqSlug } from '~page/Faq';
+import { hourSlug } from '~page/Hour';
+import { jobSlug } from '~page/Job';
+import { liveSlug } from '~page/Live';
+import { nightSlug } from '~page/Night';
+import { pmrSlug } from '~page/Pmr';
+import { pressSlug } from '~page/Press';
+import { riceSlug } from '~page/Rice';
+import { ticketListSlug } from '~page/TicketList';
 
 const getSlugPage = (slugLocale: TranslateSlugType[] | undefined, locale: string): string => {
   return slugLocale?.find((element) => element.locale === locale)?.slug ?? '';

@@ -1,23 +1,24 @@
-import { FC } from "react";
-import LanguageSwitcher, { TranslateRouteType } from "../atoms/LanguageSwitcher";
-import Link from "next/link";
-import Menu from "./Menu";
+import { FC } from 'react';
+import Link from 'next/link';
 
-type Header = {
+import LanguageSwitcher, { TranslateRouteType } from '~atoms/LanguageSwitcher';
+import Menu from '~organisms/Menu';
+
+type HeaderProps = {
   translateRout?: TranslateRouteType[];
-}
+};
 
-const Header : FC<Header> = (props) => {
-  const {translateRout} = props;
+const Header: FC<HeaderProps> = (props) => {
+  const { translateRout } = props;
 
   return (
-    <div className="header" style={{display: 'flex'}}>
+    <div className="header" style={{ display: 'flex' }}>
       <Link href="/">Home</Link>
       <Menu />
 
       <LanguageSwitcher translateRout={translateRout} />
     </div>
-  )
-}
+  );
+};
 
 export default Header;

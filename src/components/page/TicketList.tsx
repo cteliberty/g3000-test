@@ -1,25 +1,26 @@
 import { getTranslations } from 'next-intl/server';
 import { FC } from 'react';
-import Layout from 'src/components/template/layout';
-import { performRequest } from 'src/lib/datocms';
-import { PageContextType } from 'src/type/page';
-import { TranslateSlugType } from 'src/type/translateSlug';
-import { TranslateRouteType } from '../atoms/LanguageSwitcher';
-import convertSlugToRoute from 'src/lib/convertSlugToRoute';
+
+import Layout from '~template/layout';
+import { performRequest } from '~lib/datocms';
+import { PageContextType } from '~type/page';
+import { TranslateSlugType } from '~type/translateSlug';
+import convertSlugToRoute from '~lib/convertSlugToRoute';
+import { TranslateRouteType } from '~atoms/LanguageSwitcher';
 
 export const ticketListSlug: TranslateSlugType[] = [
   {
     locale: 'en',
-    slug: 'tickets'
+    slug: 'tickets',
   },
   {
     locale: 'fr',
-    slug: 'billetterie'
+    slug: 'billetterie',
   },
   {
     locale: 'es',
-    slug: 'entradas'
-  }
+    slug: 'entradas',
+  },
 ];
 
 export const ticketListRoute: TranslateRouteType[] = convertSlugToRoute(ticketListSlug);
@@ -28,21 +29,21 @@ export type PageSlugProps = {
   title?: string;
   header: {
     description?: string;
-  }
+  };
 };
 
 type queryType = {
   locale: string;
-}
+};
 
-const queryData = async (props:queryType) : Promise<PageSlugProps> => {
+const queryData = async (props: queryType): Promise<PageSlugProps> => {
   type TicketListQueryProps = {
     data: {
       ticketList: PageSlugProps;
     };
-  }
-  
-  const {locale} = props;
+  };
+
+  const { locale } = props;
   const PAGE_CONTENT_QUERY = `query TicketListQuery($locale: SiteLocale) {
     ticketList(locale: $locale) {
       title
@@ -52,19 +53,21 @@ const queryData = async (props:queryType) : Promise<PageSlugProps> => {
     }
   }`;
 
-  const {data:{ ticketList }}: TicketListQueryProps = await performRequest({
+  const {
+    data: { ticketList },
+  }: TicketListQueryProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
-      locale: locale
-    }
+      locale: locale,
+    },
   });
   return ticketList;
-}
+};
 
 const TicketList: FC<PageContextType> = async (props) => {
   const params = {
     locale: props.params.locale,
-  }
+  };
 
   const pageSlug = await queryData(params);
 
@@ -77,6 +80,6 @@ const TicketList: FC<PageContextType> = async (props) => {
       <p>{pageSlug.hero[0].description}</p> */}
     </Layout>
   );
-}
+};
 
 export default TicketList;

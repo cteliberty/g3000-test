@@ -17,14 +17,20 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
+    "baseUrl": "./src/",
     "paths": {
-      "~/lib/*": ["/lib/*"],
-      "~/components/*": ["/src/components/*"],
-      "~/atoms/*": ["/src/components/atoms/*"],
-      "~/molecules/*": ["/src/components/molecules/*"],
-      "~/organisms/*": ["/src/components/organisms/*"],
-      "~/template/*": ["/src/components/template/*"],
+      "~site/*": ["app/[locale]/*"],
+      "~lib/*": ["lib/*"],
+      "~query/*": ["query/*"],
+      "~type/*": ["type/*"],
+      "~hooks/*": ["hooks/*"],
+      "~atoms/*": ["components/atoms/*"],
+      "~molecules/*": ["components/molecules/*"],
+      "~organisms/*": ["components/organisms/*"],
+      "~template/*": ["components/template/*"],
+      "~page/*": ["components/page/*"],
+      "~fragments/*": ["fragments/*"],
+      "~navigation/*": ["navigation/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/.not-found.tsx", "src/app/.layout.tsx", "src/app/api/preview/route.js", "src/app/api/post-install.js", "src/app/api/exit-preview.js", "src/components/molecules/HeaderSite.txs"],

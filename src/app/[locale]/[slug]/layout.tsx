@@ -1,9 +1,9 @@
-import { LayoutProps } from '../layout';
+import { LayoutProps } from '~site/layout';
 
 const SlugLayout = async (props: Readonly<LayoutProps>) => {
-  const {children} = props;
+  const { children } = props;
 
   return children;
-}
+};
 
-export default SlugLayout
+export default SlugLayout;

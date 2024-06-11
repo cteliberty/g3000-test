@@ -1,35 +1,36 @@
-import { FC } from "react";
-import Link from "next/link";
-import useGetLink from "src/hooks/useGetLink";
-import { getLocale, getTranslations } from "next-intl/server";
-import { menuFragment } from "src/fragments/menuFragment";
-import { internalLinkFragment } from "src/fragments/internalLinkFragment";
-import { externalLinkFragment } from "src/fragments/externalLinkFragment";
-import { performRequest } from "src/lib/datocms";
-import SubMenu, { SubMenuElement } from "../molecules/SubMenu";
-import ListElementMenu, { MenuElement } from "../molecules/ListElementMenu";
+import { FC } from 'react';
+import Link from 'next/link';
+import { getLocale, getTranslations } from 'next-intl/server';
 
-type MenuType = {
-}
+import useGetLink from '~hooks/useGetLink';
+import { menuFragment } from '~fragments/menuFragment';
+import { internalLinkFragment } from '~fragments/internalLinkFragment';
+import { externalLinkFragment } from '~fragments/externalLinkFragment';
+import { performRequest } from '~lib/datocms';
+
+import SubMenu, { SubMenuElement } from '~molecules/SubMenu';
+import ListElementMenu, { MenuElement } from '~molecules/ListElementMenu';
+
+type MenuType = {};
 
 type queryType = {
   locale: string;
-}
+};
 
 type MenuDataType = {
-  planYourVisit :SubMenuElement[],
-  experiences:SubMenuElement[],
-  aboutUs: MenuElement[],
-}
+  planYourVisit: SubMenuElement[];
+  experiences: SubMenuElement[];
+  aboutUs: MenuElement[];
+};
 
 type MenuQueryType = {
   data: {
-    menu: MenuDataType,
-  }
-}
+    menu: MenuDataType;
+  };
+};
 
-const queryData = async (props:queryType) : Promise<MenuDataType> => {
-  const {locale} = props;
+const queryData = async (props: queryType): Promise<MenuDataType> => {
+  const { locale } = props;
   const PAGE_CONTENT_QUERY = `query MenuQuery($locale: SiteLocale) {
     menu(locale: $locale) {
       hidePlan
@@ -51,32 +52,38 @@ const queryData = async (props:queryType) : Promise<MenuDataType> => {
   ${menuFragment}
 `;
 
-  const {data:{ menu }}: MenuQueryType = await performRequest({
+  const {
+    data: { menu },
+  }: MenuQueryType = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
-      locale: locale
-    }
+      locale: locale,
+    },
   });
   return menu;
-}
+};
 
-const Menu : FC<MenuType> = async (props) => {
+const Menu: FC<MenuType> = async () => {
   const t = await getTranslations('common');
 
   const locale = await getLocale();
 
-  const menu = await queryData({locale})
+  const menu = await queryData({ locale });
 
   return (
     <div>
-      <Link href={await useGetLink({
-        _modelApiKey: 'ticket_list'
-      })}>{t('ticketing')}</Link>
+      <Link
+        href={await useGetLink({
+          _modelApiKey: 'ticket_list',
+        })}
+      >
+        {t('ticketing')}
+      </Link>
       <SubMenu elements={menu.planYourVisit} />
       <SubMenu elements={menu.experiences} />
       <ListElementMenu elements={menu.aboutUs} />
     </div>
-  )
-}
+  );
+};
 
 export default Menu;

@@ -1,4 +1,4 @@
-import { DatocmsRequest, performRequest, ResponseBodyQueryType } from "./datocms";
+import { DatocmsRequest, performRequest, ResponseBodyQueryType } from '~lib/datocms';
 
 export type ContextProps = {
   params?: {
@@ -146,15 +146,15 @@ export const getParamsSlugLocales = (slugLocales: SlugLocaleProps[]) => {
 
 type DataSlugLocalesProps = ResponseBodyQueryType & {
   data: {
-    allEntity: EntitySlugLocaleProps[]
-  }
-}
+    allEntity: EntitySlugLocaleProps[];
+  };
+};
 export const getSlugLocalesStaticPaths = async (props: SlugLocalesRequestProps) => {
   const { allEntity } = props;
   let pathsArray: PathsProps[] = [];
 
   if (allEntity) {
-    const data : DataSlugLocalesProps = await performRequest({
+    const data: DataSlugLocalesProps = await performRequest({
       query: `{
         allEntity: ${allEntity} {
           slugLocales: _allSlugLocales {
@@ -168,7 +168,7 @@ export const getSlugLocalesStaticPaths = async (props: SlugLocalesRequestProps) 
     data.data.allEntity.map((entity: EntitySlugLocaleProps) => {
       pathsArray = [...pathsArray, ...getParamsSlugLocales(entity.slugLocales)];
     });
-  } 
+  }
   // else {
   //   i18nextConfig.i18n.locales.map((lng) => {
   //     pathsArray.push({
@@ -184,11 +184,6 @@ export const getSlugLocalesStaticPaths = async (props: SlugLocalesRequestProps) 
     paths: pathsArray,
     fallback: true,
   };
-};
-
-type GetLocalProps = {
-  context: ContextProps;
-  locale?: string;
 };
 
 // export const getLocal = (props: GetLocalProps) => {

@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import { ImageProps } from 'next/image';
 import { FC } from 'react';
-import { TranslateRouteType } from '../atoms/LanguageSwitcher';
 import { getLocale } from 'next-intl/server';
-import { performRequest } from 'src/lib/datocms';
-import { responsiveImageFragment } from 'src/fragments/responsiveImageFragment';
+
+import { performRequest } from '~lib/datocms';
+import { responsiveImageFragment } from '~fragments/responsiveImageFragment';
+import { TranslateRouteType } from '~atoms/LanguageSwitcher';
 
 export type DefaultSeoType = {
   facebookPageUrl: string;
@@ -42,15 +43,15 @@ export interface HeadSiteProps {
 
 type queryType = {
   locale: string;
-}
+};
 type DefaultSiteSettingProps = {
   data: {
     _site: DefaultSiteSettingType;
   };
-}
+};
 
-const querySiteSetting = async (props:queryType) : Promise<DefaultSiteSettingType> => {
-  const {locale} = props;
+const querySiteSetting = async (props: queryType): Promise<DefaultSiteSettingType> => {
+  const { locale } = props;
   const PAGE_CONTENT_QUERY = `
     query SiteSetting($locale: SiteLocale) {
       _site(locale: $locale) {
@@ -84,20 +85,22 @@ const querySiteSetting = async (props:queryType) : Promise<DefaultSiteSettingTyp
     ${responsiveImageFragment}
   `;
 
-  const {data:{ _site }}: DefaultSiteSettingProps = await performRequest({
+  const {
+    data: { _site },
+  }: DefaultSiteSettingProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
-      locale: locale
-    }
+      locale: locale,
+    },
   });
 
   return _site;
-}
+};
 
-const HeadSite: FC<HeadSiteProps> = async(props) => {
+const HeadSite: FC<HeadSiteProps> = async (props) => {
   const { seoPage, seoMore, translateRout } = props;
   const useLocale = await getLocale();
-  const defaultSetting = await querySiteSetting({locale: useLocale});
+  const defaultSetting = await querySiteSetting({ locale: useLocale });
   const { globalSeo } = defaultSetting;
 
   const defaultTranslateRout = translateRout?.find((element) => element.locale === 'en');
@@ -128,15 +131,16 @@ const HeadSite: FC<HeadSiteProps> = async(props) => {
         href={`${process.env.NEXT_PUBLIC_SITE_URL}/sitemap.xml`}
       ></link>
 
-      {translateRout?.map((routeLocale, key) =>{
-        if (useLocale !== routeLocale.locale) return (
-          <link
-            key={`${key}-${routeLocale.locale}`}
-            rel="alternate"
-            hrefLang={routeLocale.locale}
-            href={`${process.env.NEXT_PUBLIC_SITE_URL}${routeLocale.route}`}
-          />
-        )
+      {translateRout?.map((routeLocale, key) => {
+        if (useLocale !== routeLocale.locale)
+          return (
+            <link
+              key={`${key}-${routeLocale.locale}`}
+              rel="alternate"
+              hrefLang={routeLocale.locale}
+              href={`${process.env.NEXT_PUBLIC_SITE_URL}${routeLocale.route}`}
+            />
+          );
       })}
       {defaultTranslateRout && (
         <link

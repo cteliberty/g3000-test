@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { getTranslations } from 'next-intl/server';
-import Layout from 'src/components/template/layout'
-import { performRequest } from 'src/lib/datocms';
-import { PageContextType } from 'src/type/page';
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import getMetaData, { PageSeoType } from 'src/lib/getMetataDato';
-import { seoQuery } from 'src/query/seoQuery';
-import { responsiveImageFragment } from 'src/fragments/responsiveImageFragment';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+import { performRequest } from '~lib/datocms';
+import { PageContextType } from '~type/page';
+import getMetaData, { PageSeoType } from '~lib/getMetaDataDato';
+import { seoQuery } from '~query/seoQuery';
+import { responsiveImageFragment } from '~fragments/responsiveImageFragment';
+import Layout from '~template/layout';
 
 export type HomeProps = {
   hero: {
@@ -16,19 +17,18 @@ export type HomeProps = {
   }[];
 };
 
-
 type queryType = {
   locale: string;
-}
+};
 
-const query = async (props:queryType) : Promise<HomeProps> => {
+const query = async (props: queryType): Promise<HomeProps> => {
   type HomeQueryProps = {
     data: {
       home: HomeProps;
     };
-  }
+  };
 
-  const {locale} = props;
+  const { locale } = props;
   const PAGE_CONTENT_QUERY = `query HomeQuery($locale: SiteLocale) {
     home(locale: $locale) {
       hero {
@@ -39,20 +39,27 @@ const query = async (props:queryType) : Promise<HomeProps> => {
     }
   }`;
 
-  console.log('==> home', locale,  PAGE_CONTENT_QUERY,  await performRequest({ query: PAGE_CONTENT_QUERY, variables: {locale: locale} }));
+  console.log(
+    '==> home',
+    locale,
+    PAGE_CONTENT_QUERY,
+    await performRequest({ query: PAGE_CONTENT_QUERY, variables: { locale: locale } })
+  );
 
-  const {data:{ home }}: HomeQueryProps = await performRequest({
+  const {
+    data: { home },
+  }: HomeQueryProps = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
-      locale: locale
+      locale: locale,
     },
   });
   return home;
-}
+};
 
 const Home: FC<PageContextType> = async (props) => {
   console.log('==> home locale', props.params.locale, props.params);
-  const home = await query({locale: props.params.locale});
+  const home = await query({ locale: props.params.locale });
 
   const t = await getTranslations('Index');
   return (
@@ -64,15 +71,14 @@ const Home: FC<PageContextType> = async (props) => {
       <SpeedInsights />
     </Layout>
   );
-}
+};
 
 export const generateMetadata = async ({ params }: PageContextType) => {
   type HomeSeoQuery = {
     data: {
-      home: PageSeoType
-      ;
+      home: PageSeoType;
     };
-  }
+  };
   const PAGE_CONTENT_QUERY = `
     query HomeSEOQuery($locale: SiteLocale) {
       home(locale: $locale) {
@@ -82,10 +88,12 @@ export const generateMetadata = async ({ params }: PageContextType) => {
     ${responsiveImageFragment}
   `;
 
-  const {data:{ home }}: HomeSeoQuery = await performRequest({
+  const {
+    data: { home },
+  }: HomeSeoQuery = await performRequest({
     query: PAGE_CONTENT_QUERY,
     variables: {
-      locale: params.locale
+      locale: params.locale,
     },
   });
 
@@ -93,6 +101,6 @@ export const generateMetadata = async ({ params }: PageContextType) => {
     locale: params.locale,
     pageSeo: home,
   });
-}
+};
 
 export default Home;
